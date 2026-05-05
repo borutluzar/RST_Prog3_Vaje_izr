@@ -74,6 +74,16 @@
                                     Tutorials_06.Exercise_823();
                                 }
                                 break;
+                            case Tutorials_06.Exercises.Exercise_1521:
+                                {
+                                    Tutorials_06.Exercise_1521();
+                                }
+                                break;
+                            case Tutorials_06.Exercises.Exercise_1522:
+                                {
+                                    Tutorials_06.Exercise_1522();
+                                }
+                                break;
                         }
                     }
                     break;
