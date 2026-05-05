@@ -59,6 +59,19 @@
                         }
                     }
                     break;
+
+                case Tutorial.Tutorial_06:
+                    {
+                        switch (InterfaceFunctions.ChooseOption<Tutorials_06.Exercises>())
+                        {
+                            case Tutorials_06.Exercises.Exercise_1421:
+                                {
+                                    Tutorials_06.Exercise_1421();
+                                }
+                                break;
+                        }
+                    }
+                    break;
             }
             
             Console.ReadLine();
