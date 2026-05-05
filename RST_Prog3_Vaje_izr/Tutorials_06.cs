@@ -11,6 +11,7 @@ namespace RST_Prog3_Vaje_izr
         public enum Exercises
         {
             Exercise_1421 = 1,
+            Exercise_823 = 2
         }
 
         /// <summary>
@@ -28,10 +29,24 @@ namespace RST_Prog3_Vaje_izr
             Console.WriteLine(encodeMsg.Prepare());
 
             TimeDecorator timeMsg2 = new TimeDecorator(encodeMsg);
-            Console.WriteLine(timeMsg2.Prepare());                        
+            Console.WriteLine(timeMsg2.Prepare());
+        }
+
+        /// <summary>
+        /// Zapišite razširitveno funkcijo, ki ugotovi, 
+        /// če je dani niz palindrom ali ne.
+        /// </summary>
+        public static void Exercise_823()
+        {
+            string pal1 = "RibaRežeRaciRep";
+            string pal2 = "PericaRežeRaciRep";
+
+            Console.WriteLine($"\"{pal1}\" {(pal1.IsPalindrom() ? "je" : "ni")} palindrom!");
+            Console.WriteLine($"\"{pal2}\" {(pal2.IsPalindrom() ? "je" : "ni")} palindrom!");
         }
     }
 
+    #region Naloga 14.2.1
     public interface IMessage
     {
         string Prepare();
@@ -54,7 +69,7 @@ namespace RST_Prog3_Vaje_izr
             this.message = message;
         }
 
-        public abstract string Prepare();        
+        public abstract string Prepare();
     }
 
     public class TimeDecorator : MessageDecorator
@@ -79,4 +94,32 @@ namespace RST_Prog3_Vaje_izr
             return output;
         }
     }
+    #endregion
+
+    #region Naloga 8.2.3
+
+    public static class Extensions
+    {
+        public static bool IsPalindrom(this string word)
+        {
+            word = word.ToLower();
+            var lstReverse = word.Reverse().ToList();
+
+            for (int i = 0; i < lstReverse.Count; i++)
+            {
+                if (lstReverse[i] != word[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+    #endregion
+
+    #region Naloga 15.2.1
+
+
+
+    #endregion
 }
