@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 
@@ -11,7 +12,8 @@ namespace RST_Prog3_Vaje_izr
         public enum Exercises
         {
             Exercise_1631 = 1,
-            Exercise_1722 = 2,
+            Exercise_1631_events = 2,
+            Exercise_1722 = 3,
         }
 
         /// <summary>
@@ -35,6 +37,19 @@ namespace RST_Prog3_Vaje_izr
             sta.RetrieveNews("Maraton bo v Novem mestu!", NewsType.LocalNews);
         }
 
+        public static void Exercise_1631_event()
+        {
+            PressAgency sta = new PressAgency();
+
+            Newspaper delo = new Newspaper("Delo");
+
+            sta.OnFunNewsRetrieved += delo.PrintNews;
+            sta.OnPoliticsNewsRetrieved += delo.PrintNews;
+
+            sta.RetrieveNews("Dončič še kar počiva!", NewsType.Fun);
+            sta.RetrieveNews("Maraton bo v Novem mestu!", NewsType.LocalNews);
+        }
+
         public static void Exercise_1722()
         {
             ShippingCalculator calc = new ShippingCalculator();
@@ -51,7 +66,6 @@ namespace RST_Prog3_Vaje_izr
     }
 
     #region Naloga 16.3.1
-
     public interface INewsObserver
     {
         void Update(string news);
@@ -123,6 +137,60 @@ namespace RST_Prog3_Vaje_izr
                 $"\n {news}");
         }
     }
+    #endregion
+
+    #region Naloga 16.3.1 z eventi
+
+    public interface INewsEvents
+    {
+        event Action<string> OnSportsNewsRetrieved;
+        event Action<string> OnPoliticsNewsRetrieved;
+        event Action<string> OnFunNewsRetrieved;
+        event Action<string> OnLocalNewsRetrieved;
+    }
+
+    public class PressAgency : INewsEvents
+    {
+        public event Action<string>? OnSportsNewsRetrieved;
+        public event Action<string>? OnPoliticsNewsRetrieved;
+        public event Action<string>? OnFunNewsRetrieved;
+        public event Action<string>? OnLocalNewsRetrieved;
+
+        public void RetrieveNews(string news, NewsType type)
+        {
+            switch(type)
+            {
+                case NewsType.Sports:
+                    this.OnSportsNewsRetrieved?.Invoke(news);
+                    break;
+                case NewsType.Fun:
+                    this.OnFunNewsRetrieved?.Invoke(news);
+                    break;
+                case NewsType.Politics:
+                    this.OnPoliticsNewsRetrieved?.Invoke(news);
+                    break;
+                case NewsType.LocalNews:
+                    this.OnLocalNewsRetrieved?.Invoke(news);
+                    break;
+            }            
+        }
+    }
+
+    public class Newspaper
+    {
+        private string Name { get; }
+        public Newspaper(string name)
+        {
+            this.Name = name;
+        }
+
+        public void PrintNews(string news)
+        {
+            Console.WriteLine($"[{this.Name}] Novica je naslednja: " +
+                $"\n{news}");
+        }
+    }
+
     #endregion
 
 

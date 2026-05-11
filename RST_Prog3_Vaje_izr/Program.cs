@@ -97,6 +97,11 @@
                                     Tutorials_07.Exercise_1631();
                                 }
                                 break;
+                            case Tutorials_07.Exercises.Exercise_1631_events:
+                                {
+                                    Tutorials_07.Exercise_1631_event();
+                                }
+                                break;
 
                             case Tutorials_07.Exercises.Exercise_1722:
                                 {
