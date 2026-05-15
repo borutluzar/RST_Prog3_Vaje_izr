@@ -46,14 +46,14 @@
                     {
                         switch (InterfaceFunctions.ChooseOption<Tutorials_04.Exercises>())
                         {
-                            case Tutorials_04.Exercises.Exercise_1022:
+                            case Tutorials_04.Exercises.Exercise_1122:
                                 {
-                                    Tutorials_04.Exercise_1022();
+                                    Tutorials_04.Exercise_1122();
                                 }
                                 break;
-                            case Tutorials_04.Exercises.Exercise_1121:
+                            case Tutorials_04.Exercises.Exercise_1221:
                                 {
-                                    Tutorials_04.Exercise_1121();
+                                    Tutorials_04.Exercise_1221();
                                 }
                                 break;
                         }
@@ -102,7 +102,6 @@
                                     Tutorials_07.Exercise_1631_event();
                                 }
                                 break;
-
                             case Tutorials_07.Exercises.Exercise_1722:
                                 {
                                     Tutorials_07.Exercise_1722();

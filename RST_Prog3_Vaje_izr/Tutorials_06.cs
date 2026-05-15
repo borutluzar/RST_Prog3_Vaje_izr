@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace RST_Prog3_Vaje_izr
@@ -17,7 +18,11 @@ namespace RST_Prog3_Vaje_izr
         }
 
         /// <summary>
-        ///
+        /// Imamo vmesnik IMessage s funkcijo Prepare in razred OrdinaryMessage, ki ga implementira. 
+        /// S pomočjo vzorca decorator pripravite razrede, 
+        /// ki bodo instanco razreda OrdinaryMessage ovili v funkcionalnosti, 
+        /// ki bodo sporočilu dodali: 
+        /// (a) čas pošiljanja, (b) ga šifrirali (npr.obrnili) in (c) vložili v html značke.
         /// </summary>
         public static void Exercise_1421()
         {
@@ -48,7 +53,13 @@ namespace RST_Prog3_Vaje_izr
         }
 
         /// <summary>
-        /// 
+        /// Imamo dostop do podatkov, ki jih s pomočjo API-ja pošilja vremenska hišica.
+        /// Funkcije API-ja so definirane v vmesniku IWeatherData, pošiljajo pa temperaturo, 
+        /// zračni tlak, hitrost vetra in količino padavin. 
+        /// Pripravite simulacijo razreda, ki bo implementiral zgornji vmesnik 
+        /// in pošiljal samo vrednosti posameznih senzorjev. 
+        /// Pripravite še dva proxy razreda. Prvi naj podatke za dano vremensko hišico obdela in izpiše v bolj berljivi obliki, 
+        /// drugi pa naj podatke oblikuje v JSON zapise.
         /// </summary>
         public static void Exercise_1521()
         {
@@ -60,13 +71,22 @@ namespace RST_Prog3_Vaje_izr
             Console.WriteLine(rwProxy.WindSpeed());
         }
 
+        /// <summary>
+        /// Pripravite primer virtualnega proxy razreda za primer knjig v knjižnici. 
+        /// Knjiga naj implementira vmesnik IBook s funkcijo ShowContent. 
+        /// Implementirajte osnovni razred za prave knjige, ki naj v konstruktorju naloži njeno vsebino, 
+        /// za kar potrebuje toliko milisekund, kot ima knjiga strani. 
+        /// V funkciji ShowContent nato vsebino prikaže. 
+        /// Pripravite še proxy razred, ki za začetek dobi naslov knjige in število strani, 
+        /// vsebine pa ne naloži. Naloži naj jo šele, ko jo želimo prikazati.
+        /// </summary>
         public static void Exercise_1522()
         {
             List<IBook> lstBooks = new();
             Random rnd = new Random();
             for(int i = 0;i<100; i++)
             {
-                lstBooks.Add(new BookProxy(rnd.Next(300, 1600)));
+                lstBooks.Add(new BookProxy("Naslov_" + i, rnd.Next(300, 1600)));
             }
             Console.WriteLine("Knjige so naložene");
 
@@ -228,28 +248,38 @@ namespace RST_Prog3_Vaje_izr
 
     public class RealBook : IBook
     {
+        public string Title { get; }
+
         public int Pages { get; }
 
-        public RealBook(int pgs)
+        public RealBook(string title, int pgs)
         {
+            this.Title = title;
             this.Pages = pgs;
-            ShowContent();
+            LoadContent();
+        }
+
+        private void LoadContent()
+        {
+            Console.WriteLine($"Nalagamo vsebino za knjigo z naslovom {this.Title}...");
+            Thread.Sleep(this.Pages);
         }
 
         public void ShowContent()
         {
-            Console.WriteLine("Odprli smo knjigo in beremo!");
-            Thread.Sleep(this.Pages);            
+            Console.WriteLine($"Odprli smo knjigo {this.Title} in beremo!");
         }
     }
 
     public class BookProxy : IBook 
     {
-        private RealBook book;
+        private RealBook? book;
+        private string title;
         private int pages;
 
-        public BookProxy(int pgs)
+        public BookProxy(string title, int pgs)
         {
+            this.title = title;
             this.pages = pgs;
         }
 
@@ -257,9 +287,9 @@ namespace RST_Prog3_Vaje_izr
         {
             if(book == null)
             {
-                book = new RealBook(this.pages);
+                book = new RealBook(this.title, this.pages);
             }
-            Console.WriteLine("Prebrano!");
+            book.ShowContent();
         }
     }
     #endregion

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 
 namespace RST_Prog3_Vaje_izr
@@ -10,14 +11,22 @@ namespace RST_Prog3_Vaje_izr
     {
         public enum Exercises
         {
-            Exercise_1022 = 1,
-            Exercise_1121 = 2,
+            Exercise_1122 = 1,
+            Exercise_1221 = 2,
         }
 
         /// <summary>
-        ///
+        /// Pripravljamo aplikacijo za lokalni bar, kjer bo izbor koktejlov ponujen kar na tablici, 
+        /// na kateri bo gost izbral napitek. Aplikacija bo imela preprost uporabniški vmesnik 
+        /// z vsemi napitki v ponudbi, pri čemer ga bomo razvili po navodilih lokalnega umetnika 
+        /// z veliko občutka za dizajn in zato uporabniškega vmesnika v nadaljevanju vsaj nekaj 
+        /// časa ne bomo spreminjali. Za vse posodobitve ponudbe moramo poskrbeti v zalednem delu aplikacije. 
+        /// Ne smemo pozabiti, da bo aplikacijo uporabljal tudi barman, 
+        /// ki bo ob naročilu posameznega koktejla zraven dobil še recept za pripravo. 
+        /// Pripravite osnutek preproste verzije opisane aplikacije. 
+        /// Pri implementaciji ustrezno uporabite vzorec factory.
         /// </summary>
-        public static void Exercise_1022()
+        public static void Exercise_1122()
         {
             Console.WriteLine($"Kateri koktejl želite naročiti?");
             CoctailType type = InterfaceFunctions.ChooseOption<CoctailType>();
@@ -26,9 +35,11 @@ namespace RST_Prog3_Vaje_izr
         }
 
         /// <summary>
-        /// 
+        /// Pripravite razred Pizza, ki naj ima 8 različnih tipov sestavin, 
+        /// katerih ne želimo podajati preko konstruktorja.
+        /// Zato pripravite ustrezne razrede za uporabo vzorca builder.
         /// </summary>
-        public static void Exercise_1121()
+        public static void Exercise_1221()
         {
             Console.WriteLine($"Katero pizzo smo si zaželeli:");
             PizzaType type = InterfaceFunctions.ChooseOption<PizzaType>();
@@ -37,6 +48,7 @@ namespace RST_Prog3_Vaje_izr
             Pizza? pizza = pf.CreatePizza(type);
         }
     }
+
 
     #region Naloga 10.2.2
 

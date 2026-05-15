@@ -17,7 +17,10 @@ namespace RST_Prog3_Vaje_izr
         }
 
         /// <summary>
-        ///
+        /// Pripravite sistem za obveščanje o novicah. 
+        /// Imate razred News, ki objavlja novice različnih kategorij (šport, politika, zabava). 
+        /// Ustvarite opazovalce, ki se naročijo le na določene kategorije.
+        /// Če se objavi novica iz njihove kategorije, naj prejmejo obvestilo.
         /// </summary>
         public static void Exercise_1631()
         {
@@ -37,6 +40,9 @@ namespace RST_Prog3_Vaje_izr
             sta.RetrieveNews("Maraton bo v Novem mestu!", NewsType.LocalNews);
         }
 
+        /// <summary>
+        /// Naloga 16.3.1 pripravljena s pomočjo eventov.
+        /// </summary>
         public static void Exercise_1631_event()
         {
             PressAgency sta = new PressAgency();
@@ -50,6 +56,16 @@ namespace RST_Prog3_Vaje_izr
             sta.RetrieveNews("Maraton bo v Novem mestu!", NewsType.LocalNews);
         }
 
+        /// <summary>
+        /// V spletni trgovini ob zaključku nakupa izberemo dostavljalca, 
+        /// sistem pa izračuna strošek dostave na podlagi teže paketa.
+        /// Definirajte vmesnik IShippingStrategy s funkcijo ComputeDeliveryRate in zanj 
+        /// ustvarite tri konkretne razrede s strategijami: 
+        /// SloveniaPostStrategy, DhlExpressStrategy in LocalPickupStrategy. 
+        /// Ustvarite še glavni razred ShippingCalculator, ki ima privatno lastnost ShippingStrategy, 
+        /// kateri vrednost nastavimo v funkciji SetStrategy(IShippingStrategy s). 
+        /// Ceno dostave nam naj vrne funkcija GetFinalPrice.
+        /// </summary>
         public static void Exercise_1722()
         {
             ShippingCalculator calc = new ShippingCalculator();
@@ -138,6 +154,7 @@ namespace RST_Prog3_Vaje_izr
         }
     }
     #endregion
+
 
     #region Naloga 16.3.1 z eventi
 

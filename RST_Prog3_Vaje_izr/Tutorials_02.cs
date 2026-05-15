@@ -81,6 +81,7 @@ namespace RST_Prog3_Vaje_izr
         }
     }
 
+    #region Naloga 5.7.4
     public class Komisija
     {
         public void PreveriClana()
@@ -112,7 +113,10 @@ namespace RST_Prog3_Vaje_izr
             Console.WriteLine("Preveri člana v razredu NadzornaKomisija2!");
         }
     }
+    #endregion
 
+
+    #region Naloga 5.7.5
     public class Menu
     {
         public List<Jed> SeznamJedi { get; } = new List<Jed>();
@@ -167,4 +171,5 @@ namespace RST_Prog3_Vaje_izr
             return base.ToString() + $", Kalorije: {this.Kalorije}";
         }
     }
+    #endregion
 }
